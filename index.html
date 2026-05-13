@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEO Hub · Zoopa + 498A · uso interno</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --black: #1a1a1a;
+      --gray-dark: #555;
+      --gray-mid: #888;
+      --gray-light: #e0e0e0;
+      --bg: #fafafa;
+      --card-bg: #fff;
+      --accent: #c00;
+      --accent-soft: #ffeded;
+      --green: #060;
+      --green-soft: #f0fdf0;
+      --blue: #1c4587;
+      --blue-soft: #eef3fa;
+      --yellow-soft: #fff9e6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Georgia', serif;
+      font-size: 11pt;
+      line-height: 1.55;
+      color: var(--black);
+      background: var(--bg);
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 30px 28px 60px;
+    }
+
+    /* Header */
+    .hero {
+      border-bottom: 3px solid var(--black);
+      padding-bottom: 22px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .hero-left h1 { font-size: 28pt; font-weight: 400; letter-spacing: -0.6px; margin-bottom: 6px; }
+    .hero-left .subtitle { font-size: 11pt; color: var(--gray-dark); font-style: italic; }
+    .hero-right { text-align: right; font-size: 9pt; color: var(--gray-mid); }
+    .hero-right .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 4px 10px;
+      font-family: 'Consolas', monospace;
+      font-size: 8.5pt;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* Section heading */
+    .section-block { margin-bottom: 38px; }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    .section-heading .num {
+      font-family: 'Consolas', monospace;
+      font-size: 9pt;
+      background: var(--black);
+      color: white;
+      padding: 3px 8px;
+      letter-spacing: 1px;
+    }
+    .section-heading h2 { font-size: 16pt; font-weight: 600; }
+    .section-heading .meta {
+      margin-left: auto;
+      font-size: 9pt;
+      color: var(--gray-mid);
+      font-style: italic;
+    }
+
+    /* Cards grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--gray-light);
+      padding: 16px 18px;
+      transition: border-color .12s, transform .12s;
+    }
+    .card:hover { border-color: var(--black); transform: translateY(-2px); }
+    .card .card-tag {
+      display: inline-block;
+      font-family: 'Consolas', monospace;
+      font-size: 7.5pt;
+      padding: 2px 7px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .tag-public { background: var(--green-soft); color: var(--green); border: 1px solid #a0d4a0; }
+    .tag-private { background: var(--accent-soft); color: var(--accent); border: 1px solid #f0bbbb; }
+    .tag-vault { background: var(--blue-soft); color: var(--blue); border: 1px solid #c4d3e8; }
+    .tag-skill { background: var(--yellow-soft); color: #996600; border: 1px solid #f0d77a; }
+    .card h3 {
+      font-size: 12pt;
+      margin-bottom: 5px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .card p {
+      font-size: 9.5pt;
+      color: var(--gray-dark);
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      font-size: 9pt;
+    }
+    .card-links a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 2px 0;
+      border-bottom: 1px dotted var(--accent);
+    }
+    .card-links a:hover { border-bottom-style: solid; }
+    .card-links .sep { color: var(--gray-mid); }
+
+    /* Stack diagram block */
+    .stack-block {
+      background: white;
+      border: 1px solid var(--gray-light);
+      padding: 22px 24px;
+      margin-bottom: 18px;
+    }
+    .stack-block h3 { font-size: 12pt; margin-bottom: 12px; font-weight: 600; }
+    .stack-layers { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+    .stack-layer {
+      flex: 1 1 220px;
+      padding: 14px 16px;
+      border-left: 4px solid;
+      background: var(--bg);
+    }
+    .stack-layer.medicion { border-color: var(--blue); }
+    .stack-layer.contenido { border-color: #996600; }
+    .stack-layer.produccion { border-color: var(--green); }
+    .stack-layer .layer-label {
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-mid);
+      margin-bottom: 5px;
+    }
+    .stack-layer .components { font-size: 10pt; }
+    .stack-layer .components strong { display: block; margin-bottom: 3px; }
+    .stack-layer .components .desc { font-size: 9pt; color: var(--gray-dark); margin-bottom: 8px; }
+    .stack-layer .components .desc:last-child { margin-bottom: 0; }
+
+    /* Quick stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .stat {
+      background: white;
+      border: 1px solid var(--gray-light);
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .stat .num { font-size: 22pt; font-weight: 600; color: var(--black); display: block; line-height: 1; }
+    .stat .label { font-size: 9pt; color: var(--gray-mid); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 6px; display: block; }
+
+    /* Inline alert/insight */
+    .insight {
+      background: var(--yellow-soft);
+      border: 1px solid #ffe066;
+      padding: 13px 18px;
+      margin: 14px 0;
+      font-size: 10.5pt;
+    }
+    .insight strong { color: #996600; }
+
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      padding-top: 22px;
+      border-top: 2px solid var(--black);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 9pt;
+      color: var(--gray-mid);
+    }
+    footer a { color: var(--gray-mid); text-decoration: none; border-bottom: 1px dotted var(--gray-mid); }
+    footer .brands { font-size: 13pt; font-weight: 700; color: var(--black); }
+    footer .brands span { margin-right: 12px; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body { padding: 18px 14px 40px; }
+      .hero { flex-direction: column; align-items: flex-start; }
+      .hero-right { text-align: left; }
+      .stack-layers { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="hero">
+    <div class="hero-left">
+      <h1>GEO Hub · Zoopa + 498A</h1>
+      <div class="subtitle">Centro interno de planes, manuales, knowledge bases y recursos del proyecto de visibilidad de marca en LLMs.</div>
+    </div>
+    <div class="hero-right">
+      <div class="badge">Uso interno</div><br>
+      Última actualización · 13 mayo 2026<br>
+      Owner · Carlos Ortet<br>
+      <span style="font-family:'Consolas',monospace;">noindex · nofollow</span>
+    </div>
+  </div>
+
+  <!-- QUICK STATS -->
+  <div class="stats">
+    <div class="stat"><span class="num">7</span><span class="label">Repos GitHub</span></div>
+    <div class="stat"><span class="num">5</span><span class="label">Webs publicadas</span></div>
+    <div class="stat"><span class="num">9</span><span class="label">Documentos</span></div>
+    <div class="stat"><span class="num">5</span><span class="label">Componentes stack</span></div>
+    <div class="stat"><span class="num">2.2B+</span><span class="label">Reproducciones MCN</span></div>
+  </div>
+
+  <!-- STACK -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="num">00</span>
+      <h2>Stack tecnológico</h2>
+      <span class="meta">la pila que opera detrás de cada vídeo, dashboard y review</span>
+    </div>
+
+    <div class="stack-block">
+      <h3>3 capas, 5 componentes — todos al servicio del proyecto GEO de las marcas</h3>
+      <div class="stack-layers">
+        <div class="stack-layer medicion">
+          <div class="layer-label">Capa medición</div>
+          <div class="components">
+            <strong><a href="https://georadar.app">GEOradar</a></strong>
+            <div class="desc">Mide brand citation lift, share of voice, gaps y top queries citadas en LLMs (ChatGPT, Perplexity, Google AI Overviews, Gemini, Copilot).</div>
+          </div>
+        </div>
+        <div class="stack-layer contenido">
+          <div class="layer-label">Capa contenido</div>
+          <div class="components">
+            <strong><a href="https://sam.georadar.app">SAM</a></strong>
+            <div class="desc">Semantic Alignment Machine. Alinea contenido semántica y técnicamente para maximizar cita LLM.</div>
+            <strong>LEO</strong>
+            <div class="desc">Creación de contenidos GEO-alineados en volumen + gestión de media house + orquestación cross-canal.</div>
+          </div>
+        </div>
+        <div class="stack-layer produccion">
+          <div class="layer-label">Capa producción</div>
+          <div class="components">
+            <strong>Zoopa MCN</strong>
+            <div class="desc">10+ años YouTube · 2.200M+ reproducciones · librerías B-roll/música · talent pool · Partner Manager YouTube.</div>
+            <strong>Producción inhouse Zoopa</strong>
+            <div class="desc">Plató, cámara, sonido, post-producción. Equipo certificado YouTube.</div>
+          </div>
+        </div>
+      </div>
+      <div class="insight">
+        <strong>Diferencial competitivo:</strong> ningún competidor (Profound, Peec, Otterly, Pixelmojo, First Page Sage, NoGood) combina los 5 componentes. Replicar el stack en piezas sueltas cuesta 5-10× más y requiere 6-12 meses de integración.
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICIO GEO-VIDEO -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="num">01</span>
+      <h2>Servicio GEO-Video</h2>
+      <span class="meta">producción YouTube + optimización GEO + medición LLM end-to-end</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="card-tag tag-private">Plan estratégico · privado</span>
+        <h3>Plan estratégico-comercial completo</h3>
+        <p>Argumentario, oferta empaquetada (3 tiers), mapa competitivo, roadmap 12 meses, KPIs y guion de pricing con clientes nominados.</p>
+        <div class="card-links">
+          <a href="https://github.com/498AS/geo-video-service">repo privado</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/498AS/geo-video-service/blob/main/README.md">plan MD</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-public">Plan estratégico · público sanitizado</span>
+        <h3>Plan estratégico (versión web)</h3>
+        <p>Misma estructura, sin clientes nominales ni pricing detallado. Para compartir con prospectos o partners.</p>
+        <div class="card-links">
+          <a href="https://498as.github.io/geo-video-service-public/">web</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/498AS/geo-video-service-public">repo</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-private">Manual operativo · privado</span>
+        <h3>Manual operativo completo (5 partes)</h3>
+        <p>Parte 0 stack · Parte 1 equipo Zoopa (RACI, workflow, plantillas, checklist) · Parte 2 cliente · Parte 3 YouTube/MCN · Parte 4 Carlos.</p>
+        <div class="card-links">
+          <a href="https://github.com/498AS/geo-video-service/blob/main/MANUAL.md">manual MD</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/498AS/geo-video-service/blob/main/manual.html">HTML</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-public">Manual cliente · público</span>
+        <h3>Manual cliente (entregable Standard)</h3>
+        <p>Onboarding semana a semana, cadencia operativa, dashboard GEOradar, roles cliente vs Zoopa, FAQs, escalation.</p>
+        <div class="card-links">
+          <a href="https://498as.github.io/geo-video-client-manual/">web</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/498AS/geo-video-client-manual">repo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUTUBE KNOWLEDGE -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="num">02</span>
+      <h2>YouTube · knowledge base GEO</h2>
+      <span class="meta">por qué YouTube es el canal de mayor leverage GEO</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="card-tag tag-public">Knowledge base · público</span>
+        <h3>YouTube para visibilidad en LLMs</h3>
+        <p>10 partes: por qué (datos), mecánica de indexación, tácticas, casos de éxito, plan implementación, anti-patrones, integración content-factory, KPIs, ventana de oportunidad.</p>
+        <div class="card-links">
+          <a href="https://498as.github.io/youtube-llm-visibility/">web</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/498AS/youtube-llm-visibility">repo</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/498AS/youtube-llm-visibility/blob/main/README.md">MD</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-vault">Vault</span>
+        <h3>Espejo en Obsidian</h3>
+        <p>Mismo documento dentro del vault para consulta offline y cross-link con el resto de la biblioteca GEO.</p>
+        <div class="card-links">
+          <span style="font-family:'Consolas',monospace;font-size:8.5pt;">02_GEO_GENERAL/<br>knowledge-youtube-llm-visibility-20260513.md</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REDDIT -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="num">03</span>
+      <h2>Reddit · planes activos</h2>
+      <span class="meta">cuenta personal Carlos + estrategia Zoopa</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="card-tag tag-public">Personal · público</span>
+        <h3>Plan u/MOOTOOM (Carlos Ortet)</h3>
+        <p>De 1 a 100+ karma para postear sin auto-eliminación en r/MachineLearning, r/LocalLLaMA, r/artificial. Setup, rutina diaria, plantilla de comentario, anti-shadowban.</p>
+        <div class="card-links">
+          <a href="https://carlosortet.github.io/reddit-mootoom-plan/">web</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/carlosortet/reddit-mootoom-plan">repo</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-private">Zoopa · privado</span>
+        <h3>Plan Reddit Zoopa (completo)</h3>
+        <p>5 capas: equipo Zoopa (sin cuenta marca, sin NPCs) · servicio GEO-Reddit para clientes · talent pool · Reddit Ads (Promoted) · Quora complementaria. Con clientes y nombres.</p>
+        <div class="card-links">
+          <a href="https://github.com/498AS/zoopa-reddit-strategy">repo privado</a>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-public">Zoopa · público sanitizado</span>
+        <h3>Plan Reddit Zoopa (web pública)</h3>
+        <p>Versión sin clientes ni nombres del equipo. Para compartir con partners o usar como muestra metodológica.</p>
+        <div class="card-links">
+          <a href="https://498as.github.io/zoopa-reddit-strategy-public/">web</a>
+          <span class="sep">·</span>
+          <a href="https://github.com/498AS/zoopa-reddit-strategy-public">repo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUORA -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="num">04</span>
+      <h2>Quora · canal complementario</h2>
+      <span class="meta">long-tail SEO/GEO con vida útil 5-10 años</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="card-tag tag-skill">Skill content-factory</span>
+        <h3>Quora best practices</h3>
+        <p>Requisitos cuenta, formato respuesta (600-1.200 palabras + 1 imagen min), reglas idioma (70% EN / 30% ES), anti-patrones, plantilla output content-factory.</p>
+        <div class="card-links">
+          <span style="font-family:'Consolas',monospace;font-size:8.5pt;">~/.claude/skills/content-factory/<br>references/quora-best-practices.md</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFRAESTRUCTURA -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="num">05</span>
+      <h2>Infraestructura y memoria</h2>
+      <span class="meta">dónde vive todo + cómo recuperarlo en futuras sesiones</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="card-tag tag-vault">Obsidian Vault</span>
+        <h3>02_GEO_GENERAL</h3>
+        <p>Carpeta principal del proyecto GEO en el vault. Contiene espejos de los documentos clave para consulta offline y cross-link con el MOC GEO General.</p>
+        <div class="card-links">
+          <span style="font-family:'Consolas',monospace;font-size:8.5pt;">~/Documents/OBSIDIAN_WORKSPACE/<br>BIBLIOTECA_COP_2026/<br>proyectos-claude/02_GEO_GENERAL/</span>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-skill">Claude Code · memoria</span>
+        <h3>Grafo de memoria persistente</h3>
+        <p>6 entidades documentadas: GEOradar Stack · GEOradar producto · SAM · LEO · Zoopa MCN · Servicio GEO-Video. Recuperables en cualquier sesión futura buscando "GEOradar", "SAM", "LEO" o "GEO-Video".</p>
+        <div class="card-links">
+          <span style="font-family:'Consolas',monospace;font-size:8.5pt;">mcp__memory__search_nodes</span>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-skill">Skill content-factory</span>
+        <h3>Catálogo de canales</h3>
+        <p>35 canales soportados, 12 por defecto. Quora añadida como canal Q&amp;A con referencia detallada. Outputs cross-canal automatizados desde cada source.md.</p>
+        <div class="card-links">
+          <span style="font-family:'Consolas',monospace;font-size:8.5pt;">~/.claude/skills/content-factory/<br>references/channel-catalog.md</span>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-tag tag-public">Bundle ZIP</span>
+        <h3>Bundle compartible</h3>
+        <p>Zip con todos los documentos MD y HTML estructurados en 4 carpetas + README índice. Listo para subir a Teams o compartir con equipo externo.</p>
+        <div class="card-links">
+          <span style="font-family:'Consolas',monospace;font-size:8.5pt;">~/Desktop/<br>GEO-Bundle-Zoopa-GEOradar-20260513.zip</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMOS PASOS -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="num">06</span>
+      <h2>Próximos pasos sugeridos</h2>
+      <span class="meta">qué activar primero según el plan</span>
+    </div>
+    <div class="grid">
+      <div class="card" style="border-left: 4px solid var(--accent);">
+        <span class="card-tag tag-private">Mes 1</span>
+        <h3>Activar Partner Manager YouTube</h3>
+        <p>Email a la MCN gestora solicitando intro al PM YouTube. Template y agenda de la primera reunión en la Parte 3 del manual operativo.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--accent);">
+        <span class="card-tag tag-private">Mes 1</span>
+        <h3>Cerrar cliente piloto GEO-Video</h3>
+        <p>Identificar 1 cliente GEOradar con canal YouTube activo + apetito por integrar producción. Tier Audit (€3.5-5K) como puerta de entrada.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--accent);">
+        <span class="card-tag tag-private">Mes 1-2</span>
+        <h3>Lanzar canal Carlos Ortet</h3>
+        <p>2 primeros vídeos: explainer GEO + walkthrough metodología. Cross-publish vía content-factory. Plan completo en Apéndice Carlos del manual.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--accent);">
+        <span class="card-tag tag-private">Mes 1</span>
+        <h3>Setup canal Zoopa Smart Studio</h3>
+        <p>Optimizar canal existente (bio, banner, playlists, channel keywords) para GEO. Primera publicación día 30.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="brands"><span>ZOOPA</span><span>498A</span></div>
+      <a href="https://zoopa.es">zoopa.es</a> · <a href="https://498as.com">498as.com</a> · <a href="https://georadar.app">georadar.app</a>
+    </div>
+    <div style="text-align: right;">
+      Hub interno · noindex · 13 mayo 2026<br>
+      <a href="mailto:carlos.ortet@zoopa.es">carlos.ortet@zoopa.es</a>
+    </div>
+  </footer>
+
+</body>
+</html>
